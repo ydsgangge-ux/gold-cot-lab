@@ -1,0 +1,26 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+
+# --- 本地数据库 ---
+# 首次双击启动时会自动建库并从 data/raw/cftc 的官方 CSV 导入，所以不入库。
+data/gold_cot.sqlite
+data/gold_cot.sqlite-wal
+data/gold_cot.sqlite-shm
+
+# --- 行情抓取缓存（可随时重新获取）---
+data/raw/prices/
+
+# --- Node ---
+node_modules/
+
+# --- 编辑器 / 系统 ---
+.DS_Store
+Thumbs.db
+*.log
+.idea/
+.vscode/

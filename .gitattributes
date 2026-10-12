@@ -1,0 +1,24 @@
+# 统一换行符，避免 Windows 的 CRLF 污染脚本。
+#
+# 尤其重要：启动.command 是给 macOS 的 bash 脚本，一旦被存成 CRLF，
+# Mac 上双击就会报错。下面显式锁死为 LF。
+* text=auto
+
+*.command text eol=lf
+*.sh      text eol=lf
+*.py      text eol=lf
+*.ts      text eol=lf
+*.tsx     text eol=lf
+*.json    text eol=lf
+*.md      text eol=lf
+
+# Windows 的批处理保留 CRLF 更稳妥。
+*.bat     text eol=crlf
+
+# 这些是二进制，不做任何换行转换。
+*.sqlite  binary
+*.png     binary
+*.jpg     binary
+*.ico     binary
+*.woff    binary
+*.woff2   binary

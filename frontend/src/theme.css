@@ -1,0 +1,145 @@
+/* Mac-like light grey palette: deliberately not pure white, to avoid glare
+   during long reading sessions. */
+
+:root {
+  --bg: #f2f3f5;
+  --panel: #ffffff;
+  --panel-alt: #fafbfc;
+  --border: #dfe2e6;
+  --border-strong: #c9ced5;
+  --text: #2b2f33;
+  --text-dim: #6b7280;
+  --text-faint: #9aa1a9;
+  --accent: #3f6ea8;
+  --accent-soft: #e8eef6;
+  --warn: #b9822f;
+  --warn-soft: #fdf5e6;
+  --danger: #b4483f;
+  --danger-soft: #fbeceb;
+  --ok: #3f8a63;
+  --radius: 10px;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.55 -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Microsoft YaHei', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app { max-width: 1320px; margin: 0 auto; padding: 18px 20px 48px; }
+
+.app-header { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+.app-header h1 { font-size: 19px; margin: 0; letter-spacing: .2px; }
+.app-header .tag {
+  font-size: 12px; color: var(--text-dim); background: var(--panel);
+  border: 1px solid var(--border); border-radius: 999px; padding: 2px 10px;
+}
+.app-header .sub { font-size: 12.5px; color: var(--text-dim); }
+
+.tabs { display: flex; gap: 4px; margin: 16px 0 14px; border-bottom: 1px solid var(--border); }
+.tabs button {
+  appearance: none; background: none; border: 0; border-bottom: 2px solid transparent;
+  padding: 8px 14px; font: inherit; color: var(--text-dim); cursor: pointer;
+}
+.tabs button:hover { color: var(--text); }
+.tabs button[data-active='true'] { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+
+.panel {
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 14px 16px; margin-bottom: 14px;
+}
+.panel > h2 {
+  font-size: 13px; font-weight: 600; margin: 0 0 12px; color: var(--text-dim);
+  text-transform: uppercase; letter-spacing: .6px;
+}
+
+.filters { display: flex; flex-wrap: wrap; gap: 14px 18px; align-items: flex-end; }
+.field { display: flex; flex-direction: column; gap: 4px; }
+.field label { font-size: 11.5px; color: var(--text-dim); }
+.field select, .field input {
+  font: inherit; padding: 5px 8px; border: 1px solid var(--border-strong);
+  border-radius: 7px; background: var(--panel-alt); color: var(--text); min-width: 150px;
+}
+.field input[type='date'] { min-width: 150px; }
+
+.notice {
+  font-size: 12.5px; border-radius: 8px; padding: 8px 11px; margin-top: 12px;
+  border: 1px solid var(--border); background: var(--panel-alt); color: var(--text-dim);
+}
+.notice.warn { background: var(--warn-soft); border-color: #ecd9b4; color: #7d5a1c; }
+.notice.danger { background: var(--danger-soft); border-color: #f0c9c5; color: #8d3630; }
+.notice.ok { background: #eef7f1; border-color: #c9e3d4; color: #2f6b4b; }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; }
+.card {
+  background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 12px 14px;
+}
+.card .label { font-size: 11.5px; color: var(--text-dim); margin-bottom: 6px; }
+.card .value { font-size: 22px; font-variant-numeric: tabular-nums; letter-spacing: -.2px; }
+.card .value small { font-size: 12px; color: var(--text-dim); margin-left: 4px; }
+.card .meta { font-size: 11.5px; color: var(--text-faint); margin-top: 5px; }
+.card .value.up { color: var(--ok); }
+.card .value.down { color: var(--danger); }
+/* The one-sentence explanation under a headline number. This is the line a
+   first-time reader actually needs, so it is deliberately the largest of the
+   card's secondary texts. */
+.card .plain {
+  font-size: 12.5px; color: var(--text-dim); margin-top: 7px; line-height: 1.5;
+  padding-top: 7px; border-top: 1px dashed var(--border);
+}
+.card .arrow { font-size: 15px; margin-right: 3px; }
+
+/* Inline glossary hint: the dotted underline says "hover me for plain words". */
+.term { border-bottom: 1px dotted var(--border-strong); cursor: help; }
+
+.glossary { margin-top: 14px; font-size: 12.5px; }
+.glossary > summary {
+  cursor: pointer; color: var(--accent); font-weight: 600; padding: 4px 0;
+}
+.glossary-list { margin: 10px 0 0; display: grid; gap: 9px; }
+.glossary-item { display: grid; grid-template-columns: 176px 1fr; gap: 14px; }
+.glossary-item dt { font-weight: 600; }
+.glossary-item dd { margin: 0; color: var(--text-dim); }
+.glossary-reading { display: block; color: var(--text-faint); margin-top: 2px; }
+
+.hint { font-size: 12.5px; color: var(--text-dim); line-height: 1.6; }
+
+/* File upload control: the native input is kept for keyboard access and the
+   label is styled as the visible button. */
+.upload { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
+.upload input[type='file'] { font: inherit; font-size: 12.5px; }
+.upload .file-name { font-size: 12px; color: var(--text-dim); }
+
+.kv { display: grid; grid-template-columns: max-content 1fr; gap: 5px 16px; font-size: 13px; }
+.kv dt { color: var(--text-dim); }
+.kv dd { margin: 0; font-variant-numeric: tabular-nums; }
+
+table.data { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+table.data th, table.data td {
+  text-align: right; padding: 6px 9px; border-bottom: 1px solid var(--border);
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+table.data th { color: var(--text-dim); font-weight: 600; text-align: right; }
+table.data th:first-child, table.data td:first-child { text-align: left; }
+table.data tbody tr:hover { background: var(--panel-alt); }
+
+.chart { width: 100%; height: 520px; }
+.chart-note { font-size: 11.5px; color: var(--text-faint); margin-top: 6px; }
+
+.mono { font-family: var(--mono); font-size: 12px; }
+.row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.spacer { flex: 1; }
+button.action {
+  font: inherit; padding: 6px 13px; border-radius: 7px; cursor: pointer;
+  border: 1px solid var(--border-strong); background: var(--panel-alt); color: var(--text);
+}
+button.action:hover:not(:disabled) { background: var(--accent-soft); border-color: #b9cbe2; }
+button.action:disabled { opacity: .55; cursor: default; }
+.error { color: var(--danger); font-size: 13px; }

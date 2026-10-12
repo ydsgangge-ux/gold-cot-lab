@@ -1,0 +1,1 @@
+"""Command-line entry points (importable so the API can reuse their logic)."""
